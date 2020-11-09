@@ -15,22 +15,22 @@
     <div Class="container">
     <h1>{{ page_title }}</h1>
     <div Class="row">
-        <div class="col-8">
+        <div class="col-4">
             <form action="" method="POST">
                 {{ form.hidden_tag() }}
-                <p>
-                    {{ form.username.label }}<br>
+                <div class="form-group">
+                    {{ form.username.label }}
                     {{ form.username() }}
-                </p>
-                <p>
+                </div>
+                <div class="form-group">
                     {{ form.password.label }}<br>
                     {{ form.password() }}
-                </p>
-                <p> {{ form.submit() }} </p>
+                </div>
+                {{ form.submit() }}
             </form>
 
         </div>
-        <div Class="col-4">
+        <div Class="col-8">
 
 
         </div>
