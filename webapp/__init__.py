@@ -1,8 +1,8 @@
 from flask import Flask, render_template, flash, redirect, url_for
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, logout_user
 
 from webapp.forms import LoginForm
-from webapp.model import db, News
+from webapp.model import db, News, User
 from webapp.python_org_news import get_python_news
 from webapp.weather import weather_by_city
 
@@ -34,7 +34,7 @@ def create_app():
 
     @app.route('/process-login', methods=['POST'])
     def process_login():
-        form = LoginForm
+        form = LoginForm()
 
         if form.validate_on_submit():
             user = User.query.filter(User.username == form.username.data).first()
@@ -44,6 +44,12 @@ def create_app():
                 return redirect(url_for('index'))
 
         flash("Неправильные имя или пароль")
+        return redirect(url_for('login'))
 
+    @app.route('/logout')
+    def logout():
+        logout_user()
+        flash('Вы успешно разлогинились')
+        return redirect(url_for('index'))
 
     return app
