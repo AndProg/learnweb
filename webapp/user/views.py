@@ -6,14 +6,16 @@ from webapp.user.models import User
 
 blueprint = Blueprint('user', __name__, url_prefix='/users')
 
-@blueprint.route('/login')    
+
+@blueprint.route('/login')
 def login():
-    print(current_user) # print в консоль имени и ID активного пользователя
+    print(current_user)  # print в консоль имени и ID активного пользователя
     if current_user.is_authenticated:
         return redirect(url_for('news.index'))
     title = "Авторизация"
     login_form = LoginForm()
-    return render_template('login.html', page_title = title, form = login_form)
+    return render_template('user/login.html', page_title=title,
+                           form=login_form)
 
 
 @blueprint.route('/process-login', methods=['POST'])
@@ -23,7 +25,7 @@ def process_login():
     if form.validate_on_submit():
         user = User.query.filter(User.username == form.username.data).first()
         if user and user.check_password(form.password.data):
-            login_user(user, remember = form.remember_me.data)
+            login_user(user, remember=form.remember_me.data)
             flash('Вы успешно вошли на сайт')
             return redirect(url_for('news.index'))
 
