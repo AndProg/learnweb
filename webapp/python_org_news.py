@@ -24,9 +24,23 @@ def get_python_news():
         all_news = soup.find('ul', class_='list-recent-posts').findAll('li')
         # result_news = []
         for news in all_news:
+            """
+            'text' воспринимается как property
+            'href' - атрибут. Обращаемся к нему как к элементу словаря
+            """
+
             title = news.find('a').text
             url = news.find('a')['href']
             published = news.find('time').text
+
+            """
+            # таким образом можно заполнить список словарей в цикле
+            result_news.append({
+                "title": title,
+                "url": url,
+                "published": published
+            })
+            """
             try:
                 published = datetime.strptime(published, "%b. %d, %Y")
             except ValueError:

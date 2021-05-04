@@ -4,6 +4,12 @@ from flask_login import current_user, login_user, logout_user
 from webapp.user.forms import LoginForm
 from webapp.user.models import User
 
+# аттрибуты класса BluePrint(
+#   1_название блюпринта,
+#   2_название модуля (__name __- навание по дефолту),
+#   3_url префикс_страницы с данным блюпринтом
+#       будут начинаться с этого префикса
+
 blueprint = Blueprint('user', __name__, url_prefix='/users')
 
 

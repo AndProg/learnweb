@@ -20,5 +20,6 @@ class User(db.Model, UserMixin):
     def is_admin(self):
         return self.role == 'admin'
 
+    # метод "__repr__" служит для корректного вывода аттрибутов по тек. юзеру
     def __repr__(self):
         return 'User name is >{}< || ID is >{}<'.format(self.username, self.id)
