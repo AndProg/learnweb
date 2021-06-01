@@ -22,13 +22,16 @@ class RegistrationForm(FlaskForm):
                            validators=[DataRequired()],
                            render_kw={"class": "form-control"})
     email = StringField('Электронная почта',
-                        validators=[DataRequired(), Email()],
+                        validators=[DataRequired(),
+                                    Email(message='Неверный формат email')],
                         render_kw={"class": "form-control"})
     password = PasswordField('Пароль',
                              validators=[DataRequired()],
                              render_kw={"class": "form-control"})
     password2 = PasswordField('Повторите пароль',
-                              validators=[DataRequired(), EqualTo('Password')],
+                              validators=[DataRequired(),
+                                          EqualTo('password',
+                                                  message='Dismatch')],
                               render_kw={"class": "form-control"})
     submit = SubmitField('Отправить',
                          render_kw={"class": "btn btn-primary"})
