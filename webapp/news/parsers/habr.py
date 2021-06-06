@@ -14,7 +14,7 @@ else:
     locale.setlocale(locale.LC_TIME, 'ru_RU')
 
 
-# поле Дата в БД должно быть в формате datetime. 
+# поле Дата в БД должно быть в формате datetime.
 # в таком случае фильтрации и процие операции с датами будут работать корректно
 def parse_habr_date(date_str):
     if 'сегодня' in date_str:
@@ -26,7 +26,7 @@ def parse_habr_date(date_str):
     try:
         return datetime.strptime(date_str, '%d %B %Y в %H:%M')
     except ValueError:
-        return datetime.now()    
+        return datetime.now()
 
 
 # комменты по функции есть в файле python_org_news.py
@@ -50,7 +50,7 @@ def get_news_content():
         html = get_html(news.url)
         if html:
             soup = BeautifulSoup(html, 'html.parser')
-            # .decode_contents() позволяет получить на вызоде htmL, что находится внутри, 
+            # .decode_contents() позволяет получить на вызоде htmL, что находится внутри,
             news_text = soup.find('div', class_='post__text').decode_contents()
             if news_text:
                 news.text = news_text

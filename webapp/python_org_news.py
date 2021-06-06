@@ -1,3 +1,5 @@
+# файл можно удалить, поскольку его функционал реализован в utils.py и habr.py
+
 from datetime import datetime
 
 import requests
