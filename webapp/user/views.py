@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user
 from webapp.db import db
 from webapp.user.forms import LoginForm, RegistrationForm
 from webapp.user.models import User
+from webapp.utils import get_redirect_target
 
 # аттрибуты класса BluePrint(
 #   1_название блюпринта,
@@ -21,7 +22,7 @@ blueprint = Blueprint('user', __name__, url_prefix='/users')
 def login():
     print(current_user)  # print в консоль имени и ID активного пользователя
     if current_user.is_authenticated:
-        return redirect(url_for('news.index'))
+        return redirect(get_redirect_target())
     title = "Авторизация"
     login_form = LoginForm()
     return render_template('user/login.html',
@@ -38,7 +39,7 @@ def process_login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             flash('Вы успешно вошли на сайт')
-            return redirect(url_for('news.index'))
+            return redirect(get_redirect_target())
 
     flash("Неправильные имя или пароль")
     return redirect(url_for('user.login'))
